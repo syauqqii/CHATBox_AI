@@ -2,8 +2,11 @@ package user
 
 import (
 	"context"
+	"server/util"
 	"strconv"
 	"time"
+
+	// "github.com/golang-jwt/jwt/v4"
 )
 
 type service struct {
@@ -22,8 +25,12 @@ func (s *service) CreateUser(c context.Context, req *CreateUserReq) (*CreateUser
 	ctx, cancel := context.WithTimeout(c, s.timeout)
 	defer cancel()
 
-
 	// TODO: HASH PASSWORD
+	hashedpassword, err := util.hashPassword(req.password)
+	if err != nil {
+		return nil, err
+	}
+
 	u := &User{
 		username: req.username,
 		email:    req.email,
@@ -36,8 +43,10 @@ func (s *service) CreateUser(c context.Context, req *CreateUserReq) (*CreateUser
 	}
 
 	res := &CreateUserRes{
-		UserID: strconv.Itoa(int(r.UserID)),
+		user_id:  strconv.Itoa(int(r.user_id)),
 		username: r.username,
-
+		email:    r.email,
 	}
+
+	return res, nil
 }

@@ -2,7 +2,8 @@ package main
 
 import(
 	"log"
-	"server/DB"
+	// "github.com/ADEVASATRIA/CHATBox_AI/server/db"
+
 	_ "github.com/go-sql-driver/mysql"
 	_ "github.com/lib/pq"
 )
