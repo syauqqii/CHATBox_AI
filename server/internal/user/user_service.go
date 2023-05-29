@@ -2,7 +2,7 @@ package user
 
 import (
 	"context"
-	"server/util"
+	"chatbox_ai/server/util"
 	"strconv"
 	"time"
 
@@ -26,7 +26,7 @@ func (s *service) CreateUser(c context.Context, req *CreateUserReq) (*CreateUser
 	defer cancel()
 
 	// TODO: HASH PASSWORD
-	hashedpassword, err := util.hashPassword(req.password)
+	hashedpassword, err := util.HashPassword(req.password)
 	if err != nil {
 		return nil, err
 	}
