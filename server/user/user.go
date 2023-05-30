@@ -7,27 +7,35 @@ import (
 )
 
 type User struct {
-	user_id  int64  `json:"user_id" db:"user_id"`
-	username string `json:"username" db:"username"`
-	email    string `json:"email" db:"email"`
-	password string `json:"password" db:"password"`
+	UserID   int64  `json:"user_id" db:"user_id"`
+	Username string `json:"username" db:"username"`
+	Email    string `json:"email" db:"email"`
+	Password string `json:"password" db:"password"`
 }
+
 type CreateUserReq struct {
-	username string `json:"username" db:"username"`
-	email    string `json:"email" db:"email"`
-	password string `json:"password" db:"password"`
+	Username string `json:"Username" db:"Username"`
+	Email    string `json:"Email" db:"Email"`
+	Password string `json:"Password" db:"Password"`
 }
 
 type CreateUserRes struct {
-	user_id  string `json:"user_id" db:"user_id"`
-	username string `json:"username" db:"username"`
-	email    string `json:"email" db:"email"`
+	UserID   string `json:"UserID" db:"UserID"`
+	Username string `json:"Username" db:"Username"`
+	Email    string `json:"Email" db:"Email"`
+}
+type LoginUserReq struct {
+	Email    string `json:"Email"`
+	Password string `json:"Password"`
+}
+
+type LoginUserRes struct {
+	accessToken string
+	UserID          string `json:"UserID"`
+	Username    string `json:"Username"`
 }
 
 type Repository interface {
 	CreateUser(ctx context.Context, user *User) (*User, error)
 }
 
-type Service interface {
-	CreateUser(c context.Context, req *CreateUserReq) (*CreateUserRes, error)
-}

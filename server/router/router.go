@@ -7,9 +7,11 @@ import (
 
 var r *gin.Engine
 
-func InitRouter(useHandler *user.Handler) {
+func InitRouter(userHandler *user.Handler) {
 	r = gin.Default()
-	r.POST("/sigup", useHandler.CreateUser)
+	r.POST("/signup", userHandler.CreateUser)
+	r.POST("/login", userHandler.Login)
+	r.GET("/logout", userHandler.Logout)
 }
 
 func Start(addr string) error {
